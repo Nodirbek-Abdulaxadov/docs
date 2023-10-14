@@ -5,7 +5,7 @@ description: Nodirbek Abdulaxadov
 # FileInfo va File
 
 
-FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish uchun xususiyatlar va metodlarni taqdim etadi. Shuningdek, [FileStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-5.0) obyektlarini yaratishda yordam beradi.
+FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish uchun property va metodlarni taqdim etadi. Shuningdek, [FileStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-5.0) obyektlarini yaratishda yordam beradi.
 
 
 **FileInfo propertylari:**
@@ -18,7 +18,7 @@ FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish 
 | Exists | Fayl mavjudligini tekshiradi |
 | Extension | Fayl turini\(kengaytmasini\) qaytaradi |
 | FullName | Faylning to’liq manzilini qaytaradi |
-| IsReadOnly | Fayl faqat o’qish uchunligini tekshiradi |
+| IsReadOnly | Fayl faqat o’qish uchun ekanligini tekshiradi |
 | CreationTime | Fayl yaratilgan vaqtini qaytaradi |
 | LastAccessTime | Fayl ishlatilgan oxirgi vaqtni qaytaradi |
 | LastWriteTime | Faylning oxirgi o’zgartirilgan vaqtini qaytaradi |
@@ -78,7 +78,7 @@ try
     fileInfo.CopyTo(path2);
     Console.WriteLine($"{path} fayl {path2} ga nusxalandi.");
 
-    // Ensure that the target does not exist.
+    // faylni o'chiradi
     fileInfo.Delete();
     Console.WriteLine($"{path} fayl o'chirildi");
 }
@@ -90,6 +90,31 @@ catch (Exception e)
 
 **Izohlar:**
 
-Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalaning.
+Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan File sinfi ham mavjud.
 
-Agar bitta faylda bir nechta operatsiyalarni bajarayotgan bo'lsangiz , [File](https://docs.microsoft.com/en-us/dotnet/api/system.io.file?view=net-5.0) sinfining tegishli statik metodlari o'rniga [FileInfo](https://docs.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-5.0) instansiya metodlaridan foydalanish samaraliroq bo'lishi mumkin.
+## File
+
+[**File**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.opentext?view=net-7.0) sinfi - FileInfo metodlari bilan bir xil funksionallikka ega metodlardan satatik holatda foydalanishni ta'minlaydigan sinfdir.
+File sinfi metodlari haqida batafsil ma'lumotni [bu yerdan](https://learn.microsoft.com/en-us/dotnet/api/system.io.file?view=net-7.0#methods) olishingiz mumkin.
+
+Yuqoridagi kod qismini File sinfi yordamida alternativini yozishimishiz mumkin:
+
+```csharp
+string path = "Example.txt";
+try
+{
+    string path2 = "Example_copy.txt";
+
+    // faylni pathdan path2 ga nusxalash
+    File.Copy(path, path2);
+    Console.WriteLine($"{path} fayl {path2} ga nusxalandi.");
+
+    //faylni o'chiradi
+    File.Delete(path);
+    Console.WriteLine($"{path} fayl o'chirildi");
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Xatolik sodir bo'ldi: {e.Message}");
+}
+```
