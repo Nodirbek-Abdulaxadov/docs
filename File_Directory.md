@@ -2,8 +2,9 @@
 description: Nodirbek Abdulaxadov
 ---
 
-# FileInfo va File
+# File va Directory
 
+## FileInfo
 
 FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish uchun property va metodlarni taqdim etadi. Shuningdek, [FileStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-5.0) obyektlarini yaratishda yordam beradi.
 
@@ -90,6 +91,124 @@ catch (Exception e)
 
 **Izohlar:**
 
+Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan File sinfi ham mavjud. Agar siz fayl ustida bir-nechta amallarni bajarmoqchi bo'lsangiz FileInfo sinfidan foydalanganingiz ma'qul.
+
+## File
+
+[**File**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.opentext?view=net-7.0) sinfi - FileInfo metodlari bilan bir xil funksionallikka ega metodlardan satatik holatda foydalanishni ta'minlaydigan sinfdir.
+File sinfi metodlari haqida batafsil ma'lumotni [bu yerdan](https://learn.microsoft.com/en-us/dotnet/api/system.io.file?view=net-7.0#methods) olishingiz mumkin.
+
+Yuqoridagi kod qismini File sinfi yordamida alternativini yozishimishiz mumkin:
+
+```csharp
+string path = "Example.txt";
+try
+{
+    string path2 = "Example_copy.txt";
+
+    // faylni pathdan path2 ga nusxalash
+    File.Copy(path, path2);
+    Console.WriteLine($"{path} fayl {path2} ga nusxalandi.");
+
+    //faylni o'chiradi
+    File.Delete(path);
+    Console.WriteLine($"{path} fayl o'chirildi");
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Xatolik sodir bo'ldi: {e.Message}");
+}
+```
+
+
+## DirectoryInfo
+
+DirectoryInfo sinfi - papkalarni yaratish, ko'chirish va o'chirish uchun property va metodlarni taqdim etadi. DirectoryInfo sinfidan voris olish imkonsiz.
+
+
+**[DirectoryInfo propertylari](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0#properties):**
+
+
+| Property nomi | Xususiyati |
+| :--- | :--- |
+| FullName | Papka joylashgan to’liq katalog nomini qaytaradi |
+| Exists | Papka mavjudligini tekshiradi |
+| FullName | Papkaning to’liq manzilini qaytaradi |
+| IsReadOnly | Papka faqat o’qish uchun ekanligini tekshiradi |
+| CreationTime | Papka yaratilgan vaqtini qaytaradi |
+| LastAccessTime | Papka ishlatilgan oxirgi vaqtni qaytaradi |
+| LastWriteTime | Papkaning oxirgi o’zgartirilgan vaqtini qaytaradi |
+| Name | Papka nomini qayatardi |
+| Parent | Papka joylashgan papkani (katalog usti katalogni) qaytaradi |
+| Root | Papka joylashgan root papkani (eng ustki katalogni) qaytaradi |
+
+
+**{DirectoryInfo metodlari](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0#methods):**
+
+| Metod nomi | Funksionalligi |
+| :--- | :--- |
+| CreateSubdirectory | Mavjud faylning ustiga yozishni taqiqlab, mavjud faylni yangi faylga ko'chiradi. |
+| Create | Fayl yaratadi |
+| CreateText | Yangi matnli faylni yozadigan StreamWriter-ni yaratadi. |
+| Delete | Belgilangan faylni o'chiradi. |
+| MoveTo | Belgilangan faylni yangi joyga ko'chiradi va yangi fayl nomini ko'rsatish imkoniyatini beradi. |
+| Open | Belgilangan FileMode-da ochadi. |
+| OpenRead | Faqat o'qish uchun FileStream yaratadi. |
+| OpenText | Mavjud matnli fayldan o'qiydigan UTF8 kodlash bilan StreamReader yaratadi. |
+| OpenWrite | Faqat yozish uchun FileStream yaratadi. |
+
+_FileInfo xususiyatlardan foydalanish:_
+
+```csharp
+//faylga joylashgan path
+string path = @"C:\Users\user\Desktop\test.txt";
+
+//FileInfo sinfidan yangi obyekt hosil qilish
+FileInfo fileInfo = new FileInfo(path);
+
+//Exist yordamida fayl mavjudligini tekshirish
+if (fileInfo.Exists)
+{
+    //fayl xususiyatlarini chiqarish
+    Console.WriteLine($"Fayl joylashgan katalog: \t{fileInfo.Directory}");
+    Console.WriteLine($"Fayl kengaytmasi: \t{fileInfo.Extension}");
+    Console.WriteLine($"Faylning to'liq nomi: \t{fileInfo.FullName}");
+    Console.WriteLine($"Yaratilgan vaqti: \t{fileInfo.CreationTime}");
+    Console.WriteLine($"Hajmi: \t{fileInfo.Length} bayt");
+}
+```
+
+![](../../../.gitbook/assets/image%20%2824%29.png)
+
+_FileInfo metodlaridan foydalanish:_
+
+```csharp
+DirectoryInfo directoryInfo = new(@"c:\MyDir");
+try
+{
+    // papka mavjudligini tekshiradi
+    if (directoryInfo.Exists)
+    {
+        Console.WriteLine("Bu papka allaqachon mavjud.");
+        return;
+    }
+
+    // yangi papka yaratish
+    directoryInfo.Create();
+    Console.WriteLine("Papka yaratildi.");
+
+    // papkani o'chirish
+    directoryInfo.Delete();
+    Console.WriteLine("Papka o'chirildi.");
+}
+catch (Exception e)
+{
+    Console.WriteLine("Xatolik sodir bo'ldi: {0}", e.Message);
+}
+```
+
+**Izohlar:**
+
 Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan File sinfi ham mavjud.
 
 ## File
@@ -118,3 +237,4 @@ catch (Exception e)
     Console.WriteLine($"Xatolik sodir bo'ldi: {e.Message}");
 }
 ```
+
