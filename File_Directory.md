@@ -6,10 +6,10 @@ description: Nodirbek Abdulaxadov
 
 ## FileInfo
 
-FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish uchun property va metodlarni taqdim etadi. Shuningdek, [FileStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-5.0) obyektlarini yaratishda yordam beradi.
+[FileInfo](https://learn.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-7.0) sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish uchun property va metodlarni taqdim etadi. Shuningdek, [FileStream](https://docs.microsoft.com/en-us/dotnet/api/system.io.filestream?view=net-5.0) obyektlarini yaratishda yordam beradi.
 
 
-**FileInfo propertylari:**
+[**FileInfo propertylari:**](https://learn.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-7.0#properties)
 
 
 | Property nomi | Xususiyati |
@@ -27,7 +27,7 @@ FileInfo sinfi - fayllarni yaratish, nusxalash, o'chirish, ko'chirish va ochish 
 | Name | Fayl nomini qayatardi |
 
 
-**FileInfo metodlari:**
+[**FileInfo metodlari:**](https://learn.microsoft.com/en-us/dotnet/api/system.io.fileinfo?view=net-7.0#methods)
 
 | Metod nomi | Funksionalligi |
 | :--- | :--- |
@@ -63,8 +63,6 @@ if (fileInfo.Exists)
 }
 ```
 
-![](../../../.gitbook/assets/image%20%2824%29.png)
-
 _FileInfo metodlaridan foydalanish:_
 
 ```csharp
@@ -89,13 +87,13 @@ catch (Exception e)
 }
 ```
 
-**Izohlar:**
+**Izoh:**
 
-Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan File sinfi ham mavjud. Agar siz fayl ustida bir-nechta amallarni bajarmoqchi bo'lsangiz FileInfo sinfidan foydalanganingiz ma'qul.
+Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan **File** sinfi ham mavjud. Agar siz fayl ustida bir-nechta amallarni bajarmoqchi bo'lsangiz FileInfo sinfidan foydalanganingiz ma'qul.
 
 ## File
 
-[**File**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.opentext?view=net-7.0) sinfi - FileInfo metodlari bilan bir xil funksionallikka ega metodlardan satatik holatda foydalanishni ta'minlaydigan sinfdir.
+[**File**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.opentext?view=net-7.0) sinfi - FileInfo metodlari bilan bir xil funksionallikka ega metodlardan statik holatda foydalanishni ta'minlaydigan sinfdir.
 File sinfi metodlari haqida batafsil ma'lumotni [bu yerdan](https://learn.microsoft.com/en-us/dotnet/api/system.io.file?view=net-7.0#methods) olishingiz mumkin.
 
 Yuqoridagi kod qismini File sinfi yordamida alternativini yozishimishiz mumkin:
@@ -123,7 +121,7 @@ catch (Exception e)
 
 ## DirectoryInfo
 
-DirectoryInfo sinfi - papkalarni yaratish, ko'chirish va o'chirish uchun property va metodlarni taqdim etadi. DirectoryInfo sinfidan voris olish imkonsiz.
+[**DirectoryInfo sinfi**](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0) - papkalarni yaratish, ko'chirish va o'chirish uchun property va metodlarni taqdim etadi. DirectoryInfo sinfidan voris olish imkonsiz.
 
 
 **[DirectoryInfo propertylari](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0#properties):**
@@ -133,8 +131,6 @@ DirectoryInfo sinfi - papkalarni yaratish, ko'chirish va o'chirish uchun propert
 | :--- | :--- |
 | FullName | Papka joylashgan to’liq katalog nomini qaytaradi |
 | Exists | Papka mavjudligini tekshiradi |
-| FullName | Papkaning to’liq manzilini qaytaradi |
-| IsReadOnly | Papka faqat o’qish uchun ekanligini tekshiradi |
 | CreationTime | Papka yaratilgan vaqtini qaytaradi |
 | LastAccessTime | Papka ishlatilgan oxirgi vaqtni qaytaradi |
 | LastWriteTime | Papkaning oxirgi o’zgartirilgan vaqtini qaytaradi |
@@ -143,94 +139,101 @@ DirectoryInfo sinfi - papkalarni yaratish, ko'chirish va o'chirish uchun propert
 | Root | Papka joylashgan root papkani (eng ustki katalogni) qaytaradi |
 
 
-**{DirectoryInfo metodlari](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0#methods):**
+**[DirectoryInfo metodlari](https://learn.microsoft.com/en-us/dotnet/api/system.io.directoryinfo?view=net-7.0#methods):**
 
 | Metod nomi | Funksionalligi |
 | :--- | :--- |
-| CreateSubdirectory | Mavjud faylning ustiga yozishni taqiqlab, mavjud faylni yangi faylga ko'chiradi. |
-| Create | Fayl yaratadi |
-| CreateText | Yangi matnli faylni yozadigan StreamWriter-ni yaratadi. |
-| Delete | Belgilangan faylni o'chiradi. |
-| MoveTo | Belgilangan faylni yangi joyga ko'chiradi va yangi fayl nomini ko'rsatish imkoniyatini beradi. |
-| Open | Belgilangan FileMode-da ochadi. |
-| OpenRead | Faqat o'qish uchun FileStream yaratadi. |
-| OpenText | Mavjud matnli fayldan o'qiydigan UTF8 kodlash bilan StreamReader yaratadi. |
-| OpenWrite | Faqat yozish uchun FileStream yaratadi. |
+| Create | Papka yaratadi |
+| CreateSubdirectory | Papka ichiga papka(subdirectory) yaratadi. |
+| GetDirectories | Papka ichidagi mavjud papkalarni qaytaradi |
+| GetFiles | Papka ichidagi mavjud fayllarni qaytaradi |
+| Delete | Belgilangan papkani o'chiradi. |
+| MoveTo | Belgilangan papkani yangi joyga ko'chiradi va yangi papka nomini ko'rsatish imkoniyatini beradi. |
+| Refresh | Papka holatini yangilaydi. |
 
-_FileInfo xususiyatlardan foydalanish:_
+_DirectoryInfo xususiyatlardan foydalanish:_
 
 ```csharp
-//faylga joylashgan path
-string path = @"C:\Users\user\Desktop\test.txt";
+string path = "C:\\Users\\Nodirbek";
+var directoryInfo = new DirectoryInfo(path);
 
-//FileInfo sinfidan yangi obyekt hosil qilish
-FileInfo fileInfo = new FileInfo(path);
-
-//Exist yordamida fayl mavjudligini tekshirish
-if (fileInfo.Exists)
+// papka mavjudligini tekshirish
+if (directoryInfo.Exists)
 {
-    //fayl xususiyatlarini chiqarish
-    Console.WriteLine($"Fayl joylashgan katalog: \t{fileInfo.Directory}");
-    Console.WriteLine($"Fayl kengaytmasi: \t{fileInfo.Extension}");
-    Console.WriteLine($"Faylning to'liq nomi: \t{fileInfo.FullName}");
-    Console.WriteLine($"Yaratilgan vaqti: \t{fileInfo.CreationTime}");
-    Console.WriteLine($"Hajmi: \t{fileInfo.Length} bayt");
+    Console.WriteLine("Papka ichidagi mavjud papkalar:");
+    foreach (var directory in directoryInfo.GetDirectories())
+    {
+        //papka nomi va yaratilgan vaqti
+        Console.WriteLine(directory.Name.PadRight(30) + "\t" + directory.CreationTime);
+    }
+    Console.WriteLine();
+
+    Console.WriteLine("Papka ichidagi mavjud fayllar:");
+    foreach (var file in directoryInfo.GetFiles())
+    {
+        //fayl nomi
+        Console.WriteLine(file.Name);
+    }
+}
+else
+{
+    Console.WriteLine("Bunday papka mavjud emas!");
 }
 ```
 
-![](../../../.gitbook/assets/image%20%2824%29.png)
-
-_FileInfo metodlaridan foydalanish:_
+_DirectoryInfo metodlaridan foydalanish:_
 
 ```csharp
-DirectoryInfo directoryInfo = new(@"c:\MyDir");
+string path = "C:\\Users\\Nodirbek\\Desktop\\ExampleFolder";
+string path2 = "C:\\Users\\Nodirbek\\Desktop\\ExampleFolder_Copy";
+var directoryInfo = new DirectoryInfo(path);
+
 try
 {
-    // papka mavjudligini tekshiradi
-    if (directoryInfo.Exists)
-    {
-        Console.WriteLine("Bu papka allaqachon mavjud.");
-        return;
-    }
-
-    // yangi papka yaratish
+    //papkani yaratish | agar mavjud bo'lsa xatolik sodir bo'ladi
     directoryInfo.Create();
-    Console.WriteLine("Papka yaratildi.");
 
-    // papkani o'chirish
+    // faylni pathdan path2 ga ko'chirish
+    directoryInfo.MoveTo(path2);
+    Console.WriteLine($"{path} papka {path2} ga ko'chirildi.");
+
+    // papkani o'chirish | papkani bo'sh ekanligiga ishonch hosil qiling
     directoryInfo.Delete();
-    Console.WriteLine("Papka o'chirildi.");
+    Console.WriteLine($"{path} papka o'chirildi");
 }
 catch (Exception e)
 {
-    Console.WriteLine("Xatolik sodir bo'ldi: {0}", e.Message);
+    Console.WriteLine($"Xatolik sodir bo'ldi: {e.Message}");
 }
 ```
 
 **Izohlar:**
 
-Fayllarni ochish, yaratish, ko'chirish, nomini o'zgartirish va o'chirish kabi odatiy operatsiyalar uchun FileInfo sinfidan foydalanamiz. C# dasturlash tilida fayllar bilan ishlashni yanada osonlashtira oladigan File sinfi ham mavjud.
+Fayllarni yaratish, ko'chirish, tarkibidagi papka va fayllarni ko'rish kabi bir nechta amallarni bajarish uchun DirectoryInfo sinfidan foydalanamiz. Agar papka ustida birgina amalni bajarmoqchi yoki bitta xususiyatini olmoqchi bo'lsangiz **Directory** static sinfining tegishli metodlaridan foydalanishingiz mumkin.
 
-## File
+## Directory
 
-[**File**](https://learn.microsoft.com/en-us/dotnet/api/system.io.file.opentext?view=net-7.0) sinfi - FileInfo metodlari bilan bir xil funksionallikka ega metodlardan satatik holatda foydalanishni ta'minlaydigan sinfdir.
-File sinfi metodlari haqida batafsil ma'lumotni [bu yerdan](https://learn.microsoft.com/en-us/dotnet/api/system.io.file?view=net-7.0#methods) olishingiz mumkin.
+[**Directory**](https://learn.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-7.0) sinfi - DirectoryInfo metodlari bilan bir xil funksionallikka ega metodlardan statik holatda foydalanishni ta'minlaydigan sinfdir.
+Directory sinfi metodlari haqida batafsil ma'lumotni [bu yerdan](https://learn.microsoft.com/en-us/dotnet/api/system.io.directory?view=net-7.0#methods) olishingiz mumkin.
 
-Yuqoridagi kod qismini File sinfi yordamida alternativini yozishimishiz mumkin:
+Yuqoridagi kod qismini Directory sinfi yordamida alternativini yozishimishiz mumkin:
 
 ```csharp
-string path = "Example.txt";
+string path = "C:\\Users\\Nodirbek\\Desktop\\ExampleFolder";
+string path2 = "C:\\Users\\Nodirbek\\Desktop\\ExampleFolder_Copy";
+
 try
 {
-    string path2 = "Example_copy.txt";
+    //papkani yaratish | agar mavjud bo'lsa xatolik sodir bo'ladi
+    Directory.CreateDirectory(path);
 
-    // faylni pathdan path2 ga nusxalash
-    File.Copy(path, path2);
-    Console.WriteLine($"{path} fayl {path2} ga nusxalandi.");
+    // faylni pathdan path2 ga ko'chirish
+    Directory.Move(path, path2);
+    Console.WriteLine($"{path} papka {path2} ga ko'chirildi.");
 
-    //faylni o'chiradi
-    File.Delete(path);
-    Console.WriteLine($"{path} fayl o'chirildi");
+    // papkani o'chirish | papkani bo'sh ekanligiga ishonch hosil qiling
+    Directory.Delete(path);
+    Console.WriteLine($"{path} papka o'chirildi");
 }
 catch (Exception e)
 {
