@@ -24,7 +24,9 @@ Har bir thread o'zining bajarish muhiti bilan,o'ziga tegishli kodi, datalari va 
 
 Standart holatda, har bir proccess dasturni bajaradigan kamida bitta threadga ega bo'ladi va u **Main Thread** deyiladi. Shuning uchun standart holatda(by default) har qanday dastur single-threaded (yagona threadli) bo'ladi.
 
+{% hint style="info" %} 
 Izoh: C# da _threading_ga oid bo'lgan barcha sinflar **System.Threading** namespacega tegishlidir.
+{% endhint %}
 
 Keling endi C# da Threadingni tushunish uchun misolni ko'rib chiqamiz. Bizda Program deb nomlangan classdan iborat bo'lgan oddiy dastur mavjud. class ichida esa Main deb nomlangan method mavjud bo'lib, u shunchaki Konsol oynasiga "Hello, World!" ni chiqaradi:
 
@@ -38,8 +40,85 @@ class Program
 }
 ```
 
-Endi savol: Yuqoridagi dastur ishga tushirilganda Thread dan foydalanadimi?
+#### Endi savol: Yuqoridagi dastur ishga tushirilganda Thread dan foydalanadimi?
+
 Ha, **Main Thread** deb nomlangan thread mavjud va u kodimizni ishga tushiradi. Keling, buni isbotini ko'rishamiz. Dasturimizning 5-qatori boshiga **breakpoint** qo'yamiz va dasturni ishga tushiramiz. Dastur bajarilishi 5-qatorga kelib, pauza bo'ladi:
 
-![](<ssets/threading1.png>)
+![](<assets/threading1.png>)
 
+Endi threadlar holatini ko'rish uchun Visual Studio menyular qatoridan Debug => Windows => Threads opsiyalarini tanlaymiz:
+
+![](<assets/threading2.png>)
+
+Debug => Windows => Threads opsiyalarini tanlaganingizdan so'ng , u quyidagi oynani ochadi. Bu yerda siz Main Thread hozirda Program sinfining Main metodini bajarayotganini ko'rishingiz mumkin:
+
+![](<assets/threading3.png>)
+
+
+### C# da Multithreading nima?
+
+Agar dastur kodini bajarish uchun bir nechta thread ishlatilsa, bu **Multithreading** deb ataladi. **Multithreading** - bu bir vaqtning o'zida bir nechta threadlar bilan ishlash orqali dasturni ishlash mexanizmi. _Thread_dan foydalanish dasturning samaradorligini oshiradi va protsessor ishlash vaqtini qisqartiradi. _Multithreadingdan foydalanishning asosiy afzalligi protsessor resurslaridan maksimal darajada foydalanishdir._
+
+
+### C# da Thread class nima?
+
+_**C# da Thread class - threadlar yaratish va ularni boshqarish uchun ishlatiladi.**_
+
+Quyida **multithreading** bo'yicha aniq misolni ko'ramiz:
+
+```csharp
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Main thread ishlashni boshladi!");
+
+        //2 ta thread yaratamiz
+        Thread thread1 = new Thread(DoTask1);
+        Thread thread2 = new Thread(DoTask2);
+
+        //threadlarni ishga tushiramiz
+        thread1.Start();
+        thread2.Start();
+
+        //main threadda biror vazifani bajaramiz
+        for (int i = 1; i <= 4; i++)
+        {
+            Console.WriteLine($"Main thread: {i}-natija");
+            Thread.Sleep(1000);
+        }
+
+        Console.WriteLine("Main thread ishni yakunladi!");
+    }
+
+    static void DoTask1()
+    {
+        Console.WriteLine("Thread1 ishni boshladi!");
+        for (int i = 1; i <= 4; i++)
+        {
+            Thread.Sleep(500);
+            Console.WriteLine($"Thread1: {i}-natija");
+        }
+        Console.WriteLine("Thread1 ishni yakunladi!");
+    }
+
+    static void DoTask2()
+    {
+        Console.WriteLine("Thread2 ishni boshladi!");
+        for (int i = 1; i <= 3; i++)
+        {
+            Thread.Sleep(800);
+            Console.WriteLine($"Thread2: {i}-natija");
+        }
+        Console.WriteLine("Thread2 ishni yakunladi!");
+    }
+}
+```
+
+Natija quyidagi ko'rinishda bo'ladi:
+
+![](<assets/threading4.png>)
+
+{% hint style="info" %} 
+Xulosa o'rnida shuni aytishimiz mumkinki, agar siz bir vaqtning o'zida bir nechta vazifalarni bajarmoqchi bo'lsangiz **Multithreading**ni qo'llashingiz mumkin.
+{% endhint %}
